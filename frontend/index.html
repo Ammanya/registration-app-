@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration App</title>
+  <script>
+    async function createRegistration() {
+      const Name = document.getElementById('name').value;
+      const Email = document.getElementById('email').value;
+      const DateOfBirth = document.getElementById('dob').value;
+
+      const response = await fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ Name, Email, DateOfBirth })
+      });
+
+      const data = await response.json();
+      alert(data.message);
+    }
+  </script>
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form onsubmit="event.preventDefault(); createRegistration();">
+    <input type="text" id="name" placeholder="Name" required><br>
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="date" id="dob" required><br>
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>
